@@ -1326,10 +1326,12 @@ def check_reflections(
             if keep_stereo and i * j == -1:
                 continue
 
-            # Note: q_atoms is never mutated by reorder methods, so no copy.
-            # [:, swap] already copies; scale columns directly instead of
+            # Note: [:, swap] already copies the coordinates, so the old
+            # deepcopy is skipped; scale columns directly instead of
             # dot(diag(reflection)) (identical result, no 3x3 alloc).
-            tmp_atoms = q_atoms
+            # q_atoms gets a cheap copy to keep isolation from custom
+            # reorder callables that might mutate their input.
+            tmp_atoms = q_atoms.copy()
             tmp_coord = q_coord[:, swap] * reflection
             tmp_coord -= centroid(tmp_coord)
 

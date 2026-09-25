@@ -20,6 +20,8 @@ collected when ``pytest benchmarks`` is invoked explicitly.
 import numpy as np
 import pytest
 
+pytest.importorskip("pytest_benchmark", reason="benchmarks need the rmsd[bench] extra")
+
 from rmsd import calculate_rmsd as R
 
 RESOURCE = "tests/resources"
