@@ -23,6 +23,7 @@ dependencies=["numpy", "scipy"]
 
 [project.optional-dependencies]
 qml = ["qmllib"]
+bench = ["pytest-benchmark"]
 
 [project.urls]
 Homepage = "https://github.com/charnley/rmsd"
